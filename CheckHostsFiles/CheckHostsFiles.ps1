@@ -5,7 +5,7 @@
 function WriteOutputFile
 {
 	# Function params
-	param ( [string[]] $arrParams )
+	param ( [string[]] $arrParams, $Initialize = $false )
 	
 	# Initialize variables
 	$strWriteOutput = "";
@@ -15,10 +15,17 @@ function WriteOutputFile
 	{		
 		# Add parameters to string for output
 		$strWriteOutput += "{0}{1}" -f $strArg,$strSeparator
-	}
+	}    
 		
 	# Remove last pipe
 	$strWriteOutput = $strWriteOutput.substring(0,$strWriteOutput.length-1)
+
+    # Check if need to reinitialize file
+    if(($Initialize -eq $true) -and (Test-Path -path $strOutputFile))
+    {
+        # Write to file but reinitialize
+        Clear-Content -path $strOutputFile
+    }
 
 	# Write to file
 	Add-Content -path $strOutputFile -value $strWriteOutput
@@ -28,10 +35,10 @@ function WriteOutputFile
 }
 
 # -- Custom Variables --
-$strSourceDir = Split-Path -Path $MyInvocation.MyCommand.Path
-$strSourceCsvFile = "${strSourceDir}\Check\ServerList.csv";
-$strOutputFile = "${strSourceDir}\Check\HostsFiles.csv";
-$strSeparator = ",";
+$strSourceDir = Split-Path -Path $MyInvocation.MyCommand.Path;
+$strSourceCsvFile = "${strSourceDir}\Source\ServerList.csv";
+$strOutputFile = "${strSourceDir}\Output\HostsFiles.csv";
+$strSeparator = ";";
 $strPathHosts = "\\{0}\c$\Windows\System32\drivers\etc\hosts"
 $strRegex = "^[\s\t]*[0-9]{1,4}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}"
 $strServerName = "localhost"
@@ -47,7 +54,7 @@ $intFlagEntry = 0;
 $strOutputFile = "{0}{1}_{2}" -f $strOutputFile.Substring(0,$strOutputFile.LastIndexOf('\')+1),$strDateNow,$strOutputFile.Substring($strOutputFile.LastIndexOf('\')+1);
 
 # Call function for write output in file (write header)
-WriteOutputFile "ServerName","LineValue";
+WriteOutputFile "ServerName","LineValue" -Initialize $true;
 
 # Read csv file and save into array
 $arrCsv = Import-Csv $strSourceCsvFile
