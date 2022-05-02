@@ -1,0 +1,1 @@
+This script can be used for taking a file excel and split it into separate files by specifing columns

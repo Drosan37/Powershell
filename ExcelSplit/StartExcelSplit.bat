@@ -1,0 +1,1 @@
+Powershell.exe -ExecutionPolicy ByPass -File .\ExcelSplit.ps1 
