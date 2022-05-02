@@ -1,0 +1,26 @@
+<ConfigFile>
+	<LogInfo>
+		<FileName>ReportError.log</FileName>
+	</LogInfo>
+	<SourceInstance>
+		<DSN>[ODBCDSN]</DSN>		
+	</SourceInstance>
+	<Reports>	
+		<Report>
+			<Name>TEST1</Name>
+			<Query>Test1.sql</Query>
+			<ParamsNumber>0</ParamsNumber>
+			<FileOutput>Test1.csv</FileOutput>			
+		</Report>	
+		<Report>
+			<Name>TEST2</Name>
+			<Query>Test2.sql</Query>
+			<ParamsNumber>1</ParamsNumber>
+			<FileOutput>Test2.csv</FileOutput>			
+		</Report>			
+	</Reports>
+</ConfigFile>
+
+
+
+
