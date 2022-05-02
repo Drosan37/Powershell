@@ -1,0 +1,1 @@
+This script is used for checking AD users password status
