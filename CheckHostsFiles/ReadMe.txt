@@ -1,0 +1,1 @@
+This script is used for check entries on file hosts for a server list
