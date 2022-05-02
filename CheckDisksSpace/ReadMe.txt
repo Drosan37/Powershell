@@ -1,0 +1,1 @@
+This script is used to check disk space of a server list
