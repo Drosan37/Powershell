@@ -1,0 +1,3 @@
+BEGIN WAITFOR DELAY '00:00:00'; 
+	SELECT @@Version AS SQLVersion;
+END;
